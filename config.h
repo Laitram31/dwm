@@ -6,7 +6,7 @@
 /* appearance */ static const unsigned int borderpx  = 1;        /* border pixel of windows */ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { 
+static const char *fonts[]          = {
 	"monospace:size=10", // 18
 	"Noto Emoji:size=8"
 };
@@ -99,7 +99,7 @@ static const Key keys[] = {
 	{ MODKEY,			     XK_s,	       			   spawn,		   	SHCMD("dmenu_websearch") },
 	{ MODKEY,			     XK_Return,    			   spawn,          	{.v = termcmd } },
 	//{ MODKEY|ShiftMask,	     XK_x,         			   spawn,		   	SHCMD("slock") },
-	{ 0, 					 XF86XK_ScreenSaver,	   spawn,		   	SHCMD("slock & xset dpms force off") }, //; mpc pause; pause mpv ?
+	{ 0, 					 XF86XK_ScreenSaver,	   spawn,		   	SHCMD("slock & xset dpms force off") },
 	//{ 0,                     XK_Print,     			   spawn,          	SHCMD("flameshot gui") },
 	{ 0,                     XK_Print,     			   spawn,          	SHCMD("screenshot -s") },
 	{ ShiftMask,             XK_Print,     			   spawn,          	SHCMD("screenshot") },
@@ -109,7 +109,7 @@ static const Key keys[] = {
 	{ MODKEY,				 XF86XK_AudioLowerVolume,  spawn,			SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },*/
 	{ MODKEY,				 XK_m,					   spawn,			SHCMD("$TERMINAL -e music") },
 	{ MODKEY|ShiftMask,		 XK_m,					   spawn,			SHCMD("manpdf") },
-	{ MODKEY,				 XK_u,					   spawn,			SHCMD("dmenuurl $(xclip -o)") },
+	{ MODKEY,				 XK_u,					   spawn,			SHCMD("dmenuhandler $(xclip -o)") },
 	{ MODKEY,				 XK_e,					   spawn,			SHCMD("dmenuemoji") },
 	{ MODKEY,                XK_f,         			   togglefullscr,  	{0} },
 	{ MODKEY,                XK_b,         			   togglebar,      	{0} },
