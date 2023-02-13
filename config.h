@@ -31,8 +31,8 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+//static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
 static const char *tagsel[][2] = {
 	{ "#f8f8f2", "#6272a4" },
@@ -96,7 +96,7 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 static const Key keys[] = {
 	/* modifier              key					  function			argument */
 	{ MODKEY,                XK_d,         			   spawn,			{.v = dmenucmd } },
-	{ MODKEY,			     XK_s,	       			   spawn,		   	SHCMD("dmenu_websearch") },
+	{ MODKEY,			     XK_s,	       			   spawn,		   	SHCMD("dmenuwebsearch") },
 	{ MODKEY,			     XK_Return,    			   spawn,          	{.v = termcmd } },
 	//{ MODKEY|ShiftMask,	     XK_x,         			   spawn,		   	SHCMD("slock") },
 	{ 0, 					 XF86XK_ScreenSaver,	   spawn,		   	SHCMD("slock & xset dpms force off") },
@@ -107,6 +107,7 @@ static const Key keys[] = {
 	{ MODKEY,			     XK_minus,     			   spawn,          	SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
 	/*{ MODKEY,				 XF86XK_AudioRaiseVolume,  spawn,			SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,				 XF86XK_AudioLowerVolume,  spawn,			SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },*/
+	{ MODKEY,				 XK_n,					   spawn,			SHCMD("$TERMINAL -e lf $HOME/notes") },
 	{ MODKEY,				 XK_m,					   spawn,			SHCMD("$TERMINAL -e music") },
 	{ MODKEY|ShiftMask,		 XK_m,					   spawn,			SHCMD("manpdf") },
 	{ MODKEY,				 XK_u,					   spawn,			SHCMD("dmenuhandler $(xclip -o)") },
