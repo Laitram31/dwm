@@ -8,6 +8,7 @@
 - fibonacci layout
 - super instead of alt
 - rainbow tab
+- color in status bar
 
 ---
 
