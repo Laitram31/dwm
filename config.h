@@ -116,7 +116,7 @@ static const Key keys[] = {
 	{ MODKEY,			     XK_minus,     			   spawn,          	SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
 	/*{ MODKEY,				 XF86XK_AudioRaiseVolume,  spawn,			SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,				 XF86XK_AudioLowerVolume,  spawn,			SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },*/
-	{ MODKEY,				 XK_n,					   spawn,			SHCMD("$TERMINAL -e lfub $HOME/notes") },
+	{ MODKEY,				 XK_n,					   spawn,			SHCMD("$TERMINAL -e lfub $XDG_DATA_HOME/notes") },
 	{ MODKEY,				 XK_m,					   spawn,			SHCMD("$TERMINAL -e music") },
 	{ MODKEY|ShiftMask,		 XK_m,					   spawn,			SHCMD("manpdf") },
 	{ MODKEY,				 XK_u,					   spawn,			SHCMD("dmenuhandler $(xclip -o)") },
