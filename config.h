@@ -12,31 +12,43 @@ static const char *fonts[]          = {
 };
 static const char normbgcolor[]			= "#282a36";
 static const char normbordercolor[]		= "#44475a";
-static const char normfgcolor[]			= "#f8f8f2";
+static const char normfgcolor[]			= "#f8f8f2"; // 1
 static const char selbgcolor[]			= "#6272a4";
 static const char selbordercolor[]		= "#6272a4";
-static const char selfgcolor[]			= "#f8f8f2";
-static const char goodfgcolor[]         = "#50fa7b";
-static const char warnfgcolor[]         = "#ffb86c";
-static const char urgentfgcolor[]       = "#ff5555";
+static const char selfgcolor[]			= "#f8f8f2"; // 2
+static const char cyan[]                = "#8be9fd"; // 3
+static const char green[]               = "#50fa7b"; // 4
+static const char orange[]              = "#ffb86c"; // 5
+static const char pink[]                = "#ff79c6"; // 6
+static const char purple[]              = "#bd93f9"; // 7
+static const char red[]                 = "#ff5555"; // 8
+static const char yellow[]              = "#f1fa8c"; // 9
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm]   = { normfgcolor,   normbgcolor, normbordercolor },
-	[SchemeSel]    = { selfgcolor,    selbgcolor,  selbordercolor  },
-	[SchemeGood]   = { goodfgcolor, normbgcolor, normbordercolor },
-	[SchemeWarn]   = { warnfgcolor,   normbgcolor, normbordercolor },
-	[SchemeUrgent] = { urgentfgcolor, normbgcolor, normbordercolor },
+	[SchemeNorm]   = { normfgcolor, normbgcolor, normbordercolor },
+	[SchemeSel]    = { selfgcolor,  selbgcolor,  selbordercolor  },
+	[SchemeCyan]   = { cyan,        normbgcolor, normbordercolor },
+	[SchemeGreen]  = { green,       normbgcolor, normbordercolor },
+	[SchemeOrange] = { orange,      normbgcolor, normbordercolor },
+	[SchemePink]   = { pink,        normbgcolor, normbordercolor },
+	[SchemePurple] = { purple,      normbgcolor, normbordercolor },
+	[SchemeRed]    = { red,         normbgcolor, normbordercolor },
+	[SchemeYellow] = { yellow,      normbgcolor, normbordercolor },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
 	[SchemeNorm]   = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]    = { OPAQUE, baralpha, borderalpha },
-	[SchemeGood]   = { OPAQUE, baralpha, borderalpha },
-	[SchemeWarn]   = { OPAQUE, baralpha, borderalpha },
-	[SchemeUrgent] = { OPAQUE, baralpha, borderalpha },
+	[SchemeCyan]         = { OPAQUE, baralpha, borderalpha },
+	[SchemeGreen]        = { OPAQUE, baralpha, borderalpha },
+	[SchemeOrange]       = { OPAQUE, baralpha, borderalpha },
+	[SchemePink]         = { OPAQUE, baralpha, borderalpha },
+	[SchemePurple]       = { OPAQUE, baralpha, borderalpha },
+	[SchemeRed]          = { OPAQUE, baralpha, borderalpha },
+	[SchemeYellow]       = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
