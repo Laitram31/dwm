@@ -7,7 +7,8 @@
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-    "monospace:size=10", // 18
+    "Agave:size=10",
+    "monospace:size=14", // 18
     "Noto Emoji:size=8"
 };
 static const char normbgcolor[]         = "#282a36";
