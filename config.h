@@ -8,8 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
     "Agave:size=10",
-    "monospace:size=14", // 18
-    "Noto Emoji:size=8"
+    "monospace:size=14",
+    "Noto Emoji:size=8",
 };
 static const char normbgcolor[]         = "#282a36";
 static const char normbordercolor[]     = "#44475a";
@@ -93,7 +93,7 @@ static const Layout layouts[] = {
     { "[@]",      spiral },
     { "[]=",      tile },    /* first entry is default */
     { "><>",      NULL },    /* no layout function means floating behavior */
-    { "[M]",      monocle },
+    /*{ "[M]",      monocle },*/
     { "[\\]",     dwindle },
 };
 
@@ -123,20 +123,20 @@ static const Key keys[] = {
     { 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
     { 0,                     XK_Print,                 spawn,            SHCMD("screenshot -s") },
     { ShiftMask,             XK_Print,                 spawn,            SHCMD("screenshot") },
-    { MODKEY,                XK_equal,                 spawn,            SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
-    { MODKEY,                XK_minus,                 spawn,            SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
-    { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
-    { 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
+    { MODKEY,                XK_equal,                 spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
+    { MODKEY,                XK_minus,                 spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
     { MODKEY,                XK_m,                     spawn,            SHCMD("music") },
-    { 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("echo playlist-prev | socat - /tmp/mpvsocket; pkill -RTMIN+9 dwmblocks") },
-    { 0,                     XF86XK_AudioNext,         spawn,            SHCMD("echo playlist-next | socat - /tmp/mpvsocket; pkill -RTMIN+9 dwmblocks") },
-    { 0,                     XF86XK_AudioPlay,         spawn,            SHCMD("echo cycle pause | socat - /tmp/mpvsocket; pkill -RTMIN+9 dwmblocks") },
-    { 0,                     XF86XK_AudioStop,         spawn,            SHCMD("echo stop | socat - /tmp/mpvsocket; pkill -RTMIN+9 dwmblocks") },
+    { 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("echo playlist-prev | socat - /tmp/mpvsocket; kill -43 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioNext,         spawn,            SHCMD("echo playlist-next | socat - /tmp/mpvsocket; kill -43 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioPlay,         spawn,            SHCMD("echo cycle pause | socat - /tmp/mpvsocket; kill -43 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioStop,         spawn,            SHCMD("echo stop | socat - /tmp/mpvsocket; kill -43 $(pidof dwmblocks)") },
     { MODKEY,                XK_n,                     spawn,            SHCMD("$TERMINAL -e lfub $XDG_DATA_HOME/notes") },
+    { MODKEY|ShiftMask,      XK_n,                     spawn,            SHCMD("$TERMINAL -e newsboat") },
     { MODKEY|ShiftMask,      XK_m,                     spawn,            SHCMD("manpdf") },
     { MODKEY,                XK_u,                     spawn,            SHCMD("dmenuhandler $(xclip -o)") },
     { MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
-    { MODKEY,                XK_b,                     spawn,            SHCMD("$TERMINAL -e newsboat") },
     { MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
     { MODKEY,                XK_f,                     togglefullscr,    {0} },
     { MODKEY,                XK_j,                     focusstack,       {.i = +1 } },
@@ -154,7 +154,7 @@ static const Key keys[] = {
     { ControlMask,           XK_2,                     setlayout,        {.v = &layouts[1]} },
     { ControlMask,           XK_3,                     setlayout,        {.v = &layouts[2]} },
     { ControlMask,           XK_4,                     setlayout,        {.v = &layouts[3]} },
-    { ControlMask,           XK_5,                     setlayout,        {.v = &layouts[4]} },
+    /*{ ControlMask,           XK_5,                     setlayout,        {.v = &layouts[4]} },*/
     { MODKEY,                XK_space,                 setlayout,        {0} },
     { MODKEY|ShiftMask,      XK_space,                 togglefloating,   {0} },
     { MODKEY,                XK_0,                     view,             {.ui = ~0 } },
