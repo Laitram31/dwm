@@ -1,6 +1,7 @@
-# Ratakor's dwm
+# Ratakor's build of dwm
 
 ## patch added and changes iirc
+- attach aside
 - quitprompt
 - alpha
 - fancybar

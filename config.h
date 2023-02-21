@@ -110,7 +110,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-m", dmenumon, NULL };
+static const char dmenuhp[] = "chromium"; /* high priority patch for dmenu */
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-hp", dmenuhp, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 
 #include <X11/XF86keysym.h>
