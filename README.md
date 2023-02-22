@@ -7,9 +7,11 @@
 - fancybar
 - dracula theme
 - fibonacci layout
-- super instead of alt
 - rainbow tab
 - color in status bar
+- super instead of alt
+
+- bindings are set for [st](https://git.ratakor.com/st.git) and my [scripts](https://git.ratakor.com/dotfiles.git/tree/.local/bin)
 
 ---
 

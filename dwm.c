@@ -425,15 +425,15 @@ attach(Client *c)
 void
 attachBelow(Client *c)
 {
-	//If there is nothing on the monitor or the selected client is floating, attach as normal
+	/* If there is nothing on the monitor or the selected client is floating, attach as normal */
 	if(c->mon->sel == NULL || c->mon->sel == c || c->mon->sel->isfloating) {
 		attach(c);
 		return;
 	}
 
-	//Set the new client's next property to the same as the currently selected clients next
+	/* Set the new client's next property to the same as the currently selected clients next */
 	c->next = c->mon->sel->next;
-	//Set the currently selected clients next property to the new client
+	/* Set the currently selected clients next property to the new client */
 	c->mon->sel->next = c;
 
 }
@@ -1350,7 +1350,7 @@ quit(const Arg *arg)
 void
 quitprompt(const Arg *arg)
 {
-	FILE *pp = popen("printf 'no\nyes\nrestart' | dmenu -c -sb '#ff79c6' -p 'Quit DWM?'", "r");
+	FILE *pp = popen("printf 'no\nyes\nrestart' | dmenu -i -sb '#ff79c6' -p 'Quit DWM?'", "r");
 	if(pp != NULL) {
 		char buf[1024];
 		if (fgets(buf, sizeof(buf), pp) == NULL) {
