@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 0;        /* snap pixel, sticking floating border */
+static const unsigned int snap      = 5;        /* snap pixel, sticking floating border */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
@@ -108,7 +108,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenuhp[] = "chromium"; /* high priority patch for dmenu */
+static const char dmenuhp[] = "chromium,anki"; /* high priority patch for dmenu */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-hp", dmenuhp, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
@@ -121,7 +121,6 @@ static const Key keys[] = {
     { MODKEY,                XK_Return,                spawn,            {.v = termcmd } },
     { 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
     { 0,                     XK_Print,                 spawn,            SHCMD("screenshot") },
-    { ShiftMask,             XK_Print,                 spawn,            SHCMD("screenshot -c") },
     { MODKEY,                XK_equal,                 spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
     { MODKEY,                XK_minus,                 spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
     { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
@@ -135,6 +134,7 @@ static const Key keys[] = {
     { MODKEY,                XK_n,                     spawn,            SHCMD("st -e lfub $XDG_DATA_HOME/notes") },
     { MODKEY|ShiftMask,      XK_n,                     spawn,            SHCMD("st -e newsboat") },
     { MODKEY,                XK_u,                     spawn,            SHCMD("dmenuhandler $(xclip -o)") },
+    { MODKEY|ShiftMask,      XK_u,                     spawn,            SHCMD("linkhandler $(xclip -o)") },
     { MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
     { MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("manpdf") },
     { MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
