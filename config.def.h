@@ -125,6 +125,7 @@ static const Key keys[] = {
     { MODKEY,                XK_minus,                 spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
     { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
     { 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XK_F6,                    spawn,            SHCMD("togglemic") },
     { MODKEY,                XK_m,                     spawn,            SHCMD("music") },
     { MODKEY|ShiftMask,      XK_m,                     spawn,            SHCMD("musiccmd") },
     { 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("musiccmd prev") },
