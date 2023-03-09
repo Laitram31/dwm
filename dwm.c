@@ -755,20 +755,18 @@ drawbar(Monitor *m)
 		return;
 
 	/* draw status first so it can be overdrawn by tags later */
-	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2 - correct; /* 2px right padding and correction for escape sequences*/
-		while (1) {
-			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
-			ctmp = *ts;
-			*ts = '\0';
-			drw_text(drw, m->ww - tw + tx, 0, tw - tx, bh, 0, tp, 0);
-			tx += TEXTW(tp) - lrpad;
-			if (ctmp == '\0') { break; }
-			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
-			*ts = ctmp;
-			tp = ++ts;
-		}
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	tw = TEXTW(stext) - lrpad + 2 - correct; /* 2px right padding and correction for escape sequences*/
+	while (1) {
+		if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+		ctmp = *ts;
+		*ts = '\0';
+		drw_text(drw, m->ww - tw + tx, 0, tw - tx, bh, 0, tp, 0);
+		tx += TEXTW(tp) - lrpad;
+		if (ctmp == '\0') { break; }
+		drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
+		*ts = ctmp;
+		tp = ++ts;
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -2130,9 +2128,11 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
+	Monitor* m;
 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
 		strcpy(stext, "dwm-"VERSION);
-	drawbar(selmon);
+	for(m = mons; m; m = m->next)
+		drawbar(m);
 }
 
 void
