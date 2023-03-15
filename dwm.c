@@ -152,6 +152,7 @@ static void arrangemon(Monitor *m);
 static void attach(Client *c);
 static void attachBelow(Client *c);
 static void attachstack(Client *c);
+static void bartab(Monitor *m, int offx, int sw);
 static void bstack(Monitor *m);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -445,6 +446,51 @@ attachstack(Client *c)
 	c->snext = c->mon->stack;
 	c->mon->stack = c;
 }
+
+void
+bartab(Monitor *m, int offx, int sw)
+{
+	Client *c;
+	int i, x, w, clientsnmaster = 0, clientsnstack = 0, clientsnfloating = 0;
+
+	for (i = 0, c = m->clients; c; c = c->next) {
+		if (!ISVISIBLE(c))
+			continue;
+		if (c->isfloating) {
+			clientsnfloating++;
+			continue;
+		}
+		if (i < m->nmaster)
+			clientsnmaster++;
+		else
+			clientsnstack++;
+		i++;
+	}
+
+	for (c = m->clients, i = 0; c; c = c->next) {
+		if (!ISVISIBLE(c))
+			continue;
+
+		x = offx + (((m->mw - offx - sw) / (clientsnmaster + clientsnstack + clientsnfloating)) * i);
+		w = (m->mw - offx - sw) / (clientsnmaster + clientsnstack + clientsnfloating);
+
+		drw_setscheme(drw, scheme[m->sel == c ? SchemeSel : SchemeNorm]);
+		drw_text(drw, x, 0, w, bh, lrpad / 2, c->name, 0);
+
+		/* Floating win indicator */
+		if (c->isfloating) drw_rect(drw, x + 2, 2, 5, 5, 0, 0);
+
+		/* Optional borders between tabs */
+		if (BARTAB_BORDERS) {
+			XSetForeground(drw->dpy, drw->gc, drw->scheme[ColBorder].pixel);
+			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, 1, bh);
+			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w, 0, 1, bh);
+		}
+
+		i++;
+	}
+}
+
 
 void
 bstack(Monitor *m) {
@@ -761,10 +807,10 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-	int x, w, tw = 0, mw, ew = 0;
+	int x, w, tw = 0;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
-	unsigned int i, occ = 0, urg = 0, n = 0;
+	unsigned int i, occ = 0, urg = 0;
 	char *ts = stext;
 	char *tp = stext;
 	int tx = 0;
@@ -803,8 +849,6 @@ drawbar(Monitor *m)
 	}
 
 	for (c = m->clients; c; c = c->next) {
-		if (ISVISIBLE(c))
-			n++;
 		occ |= c->tags;
 		if (c->isurgent)
 			urg |= c->tags;
@@ -824,40 +868,9 @@ drawbar(Monitor *m)
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
+	drw_rect(drw, x, 0, m->ww - tw - x, bh, 1, 1);
 	if ((w = m->ww - tw - x) > bh) {
-		if (n > 0) {
-			tw = TEXTW(m->sel->name) + lrpad;
-			mw = (tw >= w || n == 1) ? 0 : (w - tw) / (n - 1);
-
-			i = 0;
-			for (c = m->clients; c; c = c->next) {
-				if (!ISVISIBLE(c) || c == m->sel)
-					continue;
-				tw = TEXTW(c->name);
-				if(tw < mw)
-					ew += (mw - tw);
-				else
-					i++;
-			}
-			if (i > 0)
-				mw += ew / i;
-
-			for (c = m->clients; c; c = c->next) {
-				if (!ISVISIBLE(c))
-					continue;
-				tw = MIN(m->sel == c ? w : mw, TEXTW(c->name));
-
-				drw_setscheme(drw, scheme[m == selmon && m->sel == c ? SchemeSel : SchemeNorm]);
-				if (tw > lrpad / 2)
-					drw_text(drw, x, 0, tw, bh, lrpad / 2, c->name, 0);
-				if (c->isfloating)
-					drw_rect(drw, x + boxs, boxs, boxw, boxw, c->isfixed, 0);
-				x += tw;
-				w -= tw;
-			}
-		}
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		drw_rect(drw, x, 0, w, bh, 1, 1);
+		bartab(m, x, tw);
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }

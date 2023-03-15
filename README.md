@@ -6,7 +6,7 @@
 - dracula theme
 - alpha (transparency)
 - quitprompt (Super + Shift + E)
-- fancybar (all app are shown in status bar)
+- bartab (all app are shown in status bar and have an optional border)
 - only 2 layouts, spiral/tile and floating
 - true fullscreen with Super + F
 - color in status bar
