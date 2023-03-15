@@ -90,7 +90,8 @@ static const Layout layouts[] = {
 	{ "[@]",      spiral },  /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "TTT",      bstack },
-	{ "[]=",      tile },
+	/*{ "[]=",      tile },*/
+	{ NULL,       NULL }, /* this is for the cyclelayout patch */
 };
 
 /* key definitions */
@@ -150,7 +151,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_k,                     zoom,             {0} },
 	{ MODKEY,                XK_Tab,                   view,             {0} },
 	{ MODKEY|ShiftMask,      XK_q,                     killclient,       {0} },
-	{ MODKEY,                XK_space,                 setlayout,        {0} },
+	{ MODKEY,                XK_space,                 cyclelayout,      {.i = +1 } },
 	{ MODKEY|ShiftMask,      XK_space,                 togglefloating,   {0} },
 	{ MODKEY,                XK_0,                     view,             {.ui = ~0 } },
 	{ MODKEY|ShiftMask,      XK_0,                     tag,              {.ui = ~0 } },
