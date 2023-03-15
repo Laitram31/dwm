@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 5;        /* snap pixel, sticking floating border */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -13,9 +13,9 @@ static const char *fonts[]          = {
 static const char normbgcolor[]         = "#282a36";
 static const char normbordercolor[]     = "#44475a";
 static const char normfgcolor[]         = "#f8f8f2"; /* 1 */
-static const char selbgcolor[]          = "#6272a4";
-static const char selbordercolor[]      = "#6272a4";
-static const char selfgcolor[]          = "#f8f8f2"; /* 2 */
+static const char selbgcolor[]          = "#282a36";
+static const char selbordercolor[]      = "#bd93f9";
+static const char selfgcolor[]          = "#bd93f9"; /* 2 */
 static const char cyan[]                = "#8be9fd"; /* 3 */
 static const char green[]               = "#50fa7b"; /* 4 */
 static const char orange[]              = "#ffb86c"; /* 5 */
@@ -55,7 +55,6 @@ static const unsigned int alphas[][9]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const char *tagsel[][2] = {
-    { "#f8f8f2", "#6272a4" },
     { "#f8f8f2", "#bd93f9" },
     { "#f8f8f2", "#ff79c6" },
     { "#f8f8f2", "#ff5555" },
@@ -64,6 +63,7 @@ static const char *tagsel[][2] = {
     { "#282a36", "#50fa7b" },
     { "#282a36", "#8be9fd" },
     { "#282a36", "#f8f8f2" },
+    { "#f8f8f2", "#6272a4" },
 };
 
 static const unsigned int tagalpha[] = { OPAQUE, baralpha };
@@ -74,8 +74,7 @@ static const Rule rules[] = {
      *    WM_NAME(STRING) = title
      */
     /* class      instance    title       tags mask     isfloating   monitor */
-    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    { "dummy",    NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -85,14 +84,12 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 static const int attachbelow = 1;    /* 1 means attach after the currently active window */
 
-#include "fibonacci.c"
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[@]",      spiral },  /* first entry is default */
-    { "[]=",      tile },
     { "><>",      NULL },    /* no layout function means floating behavior */
-    /*{ "[M]",      monocle },*/
-    { "[\\]",     dwindle },
+    { "TTT",      bstack },
+    /*{ "[]=",      tile },*/
 };
 
 /* key definitions */
@@ -152,11 +149,6 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,      XK_k,                     zoom,             {0} },
     { MODKEY,                XK_Tab,                   view,             {0} },
     { MODKEY|ShiftMask,      XK_q,                     killclient,       {0} },
-    { ControlMask,           XK_1,                     setlayout,        {.v = &layouts[0]} },
-    { ControlMask,           XK_2,                     setlayout,        {.v = &layouts[1]} },
-    { ControlMask,           XK_3,                     setlayout,        {.v = &layouts[2]} },
-    { ControlMask,           XK_4,                     setlayout,        {.v = &layouts[3]} },
-    /*{ ControlMask,           XK_5,                     setlayout,        {.v = &layouts[4]} },*/
     { MODKEY,                XK_space,                 setlayout,        {0} },
     { MODKEY|ShiftMask,      XK_space,                 togglefloating,   {0} },
     { MODKEY,                XK_0,                     view,             {.ui = ~0 } },

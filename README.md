@@ -2,14 +2,14 @@
 
 ## patch added and changes iirc
 - attach aside
-- quitprompt
-- alpha
-- fancybar
-- dracula theme
-- fibonacci layout
 - rainbow tab
+- dracula theme
+- alpha (transparency)
+- quitprompt (Super + Shift + E)
+- fancybar (all app are shown in status bar)
+- only 2 layouts, spiral/tile and floating
+- true fullscreen with Super + F
 - color in status bar
-- super instead of alt
 - statusbar on all monitors
 
 - bindings are set for [st](https://git.ratakor.com/st.git) and my [scripts](https://git.ratakor.com/dotfiles.git/tree/.local/bin)
