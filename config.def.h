@@ -53,7 +53,6 @@ static const unsigned int alphas[][9]      = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-//static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
 static const char *tagsel[][2] = {
     { "#f8f8f2", "#6272a4" },
@@ -121,12 +120,13 @@ static const Key keys[] = {
     { MODKEY,                XK_s,                     spawn,            SHCMD("dmenuwebsearch") },
     { MODKEY,                XK_Return,                spawn,            {.v = termcmd } },
     { 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
+    { 0,                     XF86XK_Battery,           spawn,            SHCMD("battery") },
     { 0,                     XK_Print,                 spawn,            SHCMD("screenshot") },
-    { MODKEY,                XK_equal,                 spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
-    { MODKEY,                XK_minus,                 spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
-    { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("pamixer -i 5; kill -44 $(pidof dwmblocks)") },
-    { 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("pamixer -d 5; kill -44 $(pidof dwmblocks)") },
-    { 0,                     XK_F6,                    spawn,            SHCMD("togglemic") },
+    { MODKEY,                XK_equal,                 spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+; kill -44 $(pidof dwmblocks)") },
+    { MODKEY,                XK_minus,                 spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XK_F6,                    spawn,            SHCMD("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle;  kill -45 $(pidof dwmblocks)") },
     { MODKEY,                XK_m,                     spawn,            SHCMD("music") },
     { MODKEY|ShiftMask,      XK_m,                     spawn,            SHCMD("musiccmd") },
     { 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("musiccmd prev") },
