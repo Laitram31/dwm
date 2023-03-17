@@ -116,7 +116,6 @@ static const char *termcmd[]  = { "st", NULL };
 static const Key keys[] = {
 	/* modifier              key                       function          argument */
 	{ MODKEY,                XK_d,                     spawn,            {.v = dmenucmd } },
-	{ MODKEY,                XK_s,                     spawn,            SHCMD("dmenuwebsearch") },
 	{ MODKEY,                XK_Return,                spawn,            {.v = termcmd } },
 	{ 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
 	{ 0,                     XF86XK_Battery,           spawn,            SHCMD("battery") },
@@ -137,9 +136,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_n,                     spawn,            SHCMD("st -e newsboat") },
 	{ MODKEY,                XK_u,                     spawn,            SHCMD("dmenuhandler $(xclip -o)") },
 	{ MODKEY|ShiftMask,      XK_u,                     spawn,            SHCMD("linkhandler $(xclip -o)") },
-	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
 	{ MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("manpdf") },
-	{ MODKEY,                XK_w,                     spawn,            SHCMD("parabola-wiki") },
+	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
+	{ MODKEY,                XK_s,                     spawn,            SHCMD("dmenusearch web") },
+	{ MODKEY,                XK_a,                     spawn,            SHCMD("dmenusearch aur") },
+	{ MODKEY,                XK_w,                     spawn,            SHCMD("dmenusearch wiki") },
 	{ MODKEY|ShiftMask,      XK_w,                     spawn,            SHCMD("off") },
 	{ MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
 	{ MODKEY,                XK_f,                     togglefullscr,    {0} },
