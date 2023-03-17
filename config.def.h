@@ -126,6 +126,7 @@ static const Key keys[] = {
 	{ 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+; kill -44 $(pidof dwmblocks)") },
 	{ 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; kill -44 $(pidof dwmblocks)") },
 	{ 0,                     XK_F6,                    spawn,            SHCMD("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle;  kill -45 $(pidof dwmblocks)") },
+	{ 0,                     XK_F7,                    spawn,            SHCMD("st -e dmenurecord") },
 	{ MODKEY,                XK_m,                     spawn,            SHCMD("music") },
 	{ MODKEY|ShiftMask,      XK_m,                     spawn,            SHCMD("musiccmd") },
 	{ 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("musiccmd prev") },
@@ -138,6 +139,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_u,                     spawn,            SHCMD("linkhandler $(xclip -o)") },
 	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
 	{ MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("manpdf") },
+	{ MODKEY,                XK_w,                     spawn,            SHCMD("parabola-wiki") },
+	{ MODKEY|ShiftMask,      XK_w,                     spawn,            SHCMD("off") },
 	{ MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
 	{ MODKEY,                XK_f,                     togglefullscr,    {0} },
 	{ MODKEY,                XK_j,                     focusstack,       {.i = +1 } },
@@ -169,7 +172,6 @@ static const Key keys[] = {
 	TAGKEYS(                 XK_8,                                       7)
 	TAGKEYS(                 XK_9,                                       8)
 	{ MODKEY|ShiftMask,      XK_e,                     quitprompt,       {0} },
-	{ MODKEY|ShiftMask,      XK_w,                     spawn,            SHCMD("off") },
 };
 
 /* button definitions */
