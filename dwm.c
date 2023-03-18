@@ -127,6 +127,7 @@ struct Monitor {
 	unsigned int tagset[2];
 	int showbar;
 	int topbar;
+	int barborders;
 	Client *clients;
 	Client *sel;
 	Client *stack;
@@ -490,7 +491,7 @@ bartab(Monitor *m, int offx, int sw)
 		if (c->isfloating) drw_rect(drw, x + 2, 2, 5, 5, 0, 0);
 
 		/* Optional borders between tabs */
-		if (BARTAB_BORDERS) {
+		if (barborders) {
 			XSetForeground(drw->dpy, drw->gc, drw->scheme[ColBorder].pixel);
 			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, 1, bh);
 			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w, 0, 1, bh);
@@ -899,9 +900,8 @@ drawbar(Monitor *m)
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	drw_rect(drw, x, 0, m->ww - tw - x, bh, 1, 1);
-	if ((w = m->ww - tw - x) > bh) {
-		bartab(m, x, tw);
-	}
+	if ((w = m->ww - tw - x) > bh)
+		bartab(m, x, tw+5);
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 

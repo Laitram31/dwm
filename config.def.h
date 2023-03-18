@@ -2,9 +2,10 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 5;        /* snap pixel, sticking floating border */
+static const unsigned int snap      = 5;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int barborders         = 1;        /* 0 means no borders in bar */
 static const char *fonts[]          = {
 	"Agave:size=10",
 	"monospace:size=14", /* this is for nerd font icons, see dwmblocks */
@@ -25,8 +26,6 @@ static const char pink[]                = "#ff79c6"; /* 8 */
 static const char purple[]              = "#bd93f9"; /* 9 */
 static const unsigned int baralpha      = 0xd0;
 static const unsigned int borderalpha   = OPAQUE;
-#define BARTAB_BORDERS 1       // 0 = off, 1 = on
-
 static const char *colors[][9]      = {
 	/*                  fg           bg           border   */
 	[SchemeNorm]    = { normfgcolor, normbgcolor, normbordercolor },
@@ -140,6 +139,7 @@ static const Key keys[] = {
 	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
 	{ MODKEY,                XK_s,                     spawn,            SHCMD("dmenusearch web") },
 	{ MODKEY,                XK_a,                     spawn,            SHCMD("dmenusearch aur") },
+	{ MODKEY,                XK_y,                     spawn,            SHCMD("dmenusearch youtube") },
 	{ MODKEY,                XK_w,                     spawn,            SHCMD("dmenusearch wiki") },
 	{ MODKEY|ShiftMask,      XK_w,                     spawn,            SHCMD("off") },
 	{ MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
