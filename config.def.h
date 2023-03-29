@@ -24,10 +24,8 @@ static const char red[]                 = "#ff5555"; /* 6 */
 static const char yellow[]              = "#f1fa8c"; /* 7 */
 static const char pink[]                = "#ff79c6"; /* 8 */
 static const char cyan[]                = "#8be9fd"; /* 9 */
-static const unsigned int baralpha      = 0xd0;
-static const unsigned int borderalpha   = OPAQUE;
-static const char *colors[][9]      = {
-	/*                  fg           bg           border   */
+static const char *colors[][9]          = {
+	/*                  fg           bg           border          */
 	[SchemeNorm]    = { normfgcolor, normbgcolor, normbordercolor },
 	[SchemeSel]     = { selfgcolor,  selbgcolor,  selbordercolor  },
 	[SchemePurple]  = { purple,      normbgcolor, normbordercolor },
@@ -38,18 +36,20 @@ static const char *colors[][9]      = {
 	[SchemePink]    = { pink,        normbgcolor, normbordercolor },
 	[SchemeCyan]    = { cyan,        normbgcolor, normbordercolor },
 };
-static const unsigned int alphas[][9]      = {
-	/*                  fg      bg        border     */
-	[SchemeNorm]    = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]     = { OPAQUE, baralpha, borderalpha },
-	[SchemePurple]  = { OPAQUE, baralpha, borderalpha },
-	[SchemeGreen]   = { OPAQUE, baralpha, borderalpha },
-	[SchemeOrange]  = { OPAQUE, baralpha, borderalpha },
-	[SchemeRed]     = { OPAQUE, baralpha, borderalpha },
-	[SchemeYellow]  = { OPAQUE, baralpha, borderalpha },
-	[SchemePink]    = { OPAQUE, baralpha, borderalpha },
-	[SchemeCyan]    = { OPAQUE, baralpha, borderalpha },
+static const unsigned int alphas[][9]   = {
+	/*                  fg      bg    border */
+	[SchemeNorm]    = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeSel]     = { OPAQUE, 0xd0, OPAQUE },
+	[SchemePurple]  = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeGreen]   = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeOrange]  = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeRed]     = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeYellow]  = { OPAQUE, 0xd0, OPAQUE },
+	[SchemePink]    = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeCyan]    = { OPAQUE, 0xd0, OPAQUE },
 };
+
+static const unsigned int tagalpha[] = { OPAQUE, 0xd0 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -65,8 +65,6 @@ static const char *tagsel[][2] = {
 	{ "#282a36", "#f8f8f2" },
 	{ "#f8f8f2", "#6272a4" },
 };
-
-static const unsigned int tagalpha[] = { OPAQUE, baralpha };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -106,7 +104,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenuhp[] = "chromium,anki"; /* high priority patch for dmenu */
+static const char dmenuhp[] = "browser,anki"; /* high priority patch for dmenu */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-hp", dmenuhp, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
@@ -136,8 +134,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_n,                     spawn,            SHCMD("st -e newsboat") },
 	{ MODKEY,                XK_u,                     spawn,            SHCMD("dmenuhandler $(xclip -o)") },
 	{ MODKEY|ShiftMask,      XK_u,                     spawn,            SHCMD("linkhandler $(xclip -o)") },
-	{ MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("manpdf") },
 	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
+	{ MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("dmenusearch man") },
 	{ MODKEY,                XK_s,                     spawn,            SHCMD("dmenusearch web") },
 	{ MODKEY,                XK_a,                     spawn,            SHCMD("dmenusearch aur") },
 	{ MODKEY,                XK_y,                     spawn,            SHCMD("dmenusearch youtube") },
