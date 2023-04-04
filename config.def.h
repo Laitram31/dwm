@@ -84,10 +84,9 @@ static const int attachbelow = 1;    /* 1 means attach after the currently activ
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[@]",      spiral },  /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[]=",      tile }, /* first entry is default */
 	{ "TTT",      bstack },
-	/*{ "[]=",      tile },*/
+	{ "><>",      NULL }, /* no layout function means floating behavior */
 	{ NULL,       NULL }, /* this is for the cyclelayout patch */
 };
 
@@ -104,7 +103,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenuhp[] = "browser,chromium,anki"; /* high priority patch for dmenu */
+static const char dmenuhp[] = "browser,mail,chromium,anki"; /* high priority patch for dmenu */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-hp", dmenuhp, NULL };
 static const char *termcmd[]  = { "st", NULL };
 

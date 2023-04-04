@@ -7,7 +7,7 @@
 - alpha (transparency)
 - quitprompt (Super + Shift + E)
 - bartab (all app are shown in status bar and have an optional border)
-- 3 layouts, spiral/tile, floating and bottom stack
+- 3 layouts, tile, bottom stack and floating
 - true fullscreen with Super + F
 - color in status bar
 - statusbar on all monitors
@@ -15,6 +15,7 @@
 - smartborders
 
 - bindings are set for [st](https://git.ratakor.com/st.git) and my [scripts](https://git.ratakor.com/dotfiles.git/tree/.local/bin)
+- modify line 106 and 107 in config.h to match with your version of dmenu otherwise use [mine](https://git.ratakor.com/dmenu.git)
 - the man page is not up to date
 
 ---

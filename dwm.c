@@ -215,7 +215,6 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
-static void spiral(Monitor *m);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
@@ -243,7 +242,7 @@ static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
-static void xinitvisual();
+static void xinitvisual(void);
 static void zoom(const Arg *arg);
 
 /* variables */
@@ -1837,59 +1836,6 @@ spawn(const Arg *arg)
 }
 
 void
-spiral(Monitor *m) {
-	unsigned int i, n, nx, ny, nw, nh, bw;
-	Client *c;
-
-	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if(n == 0)
-		return;
-	if (n == 1)
-		bw = 0;
-	else
-		bw = borderpx;
-
-	nx = m->wx;
-	ny = 0;
-	nw = m->ww;
-	nh = m->wh;
-
-	for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
-		if((i % 2 && nh / 2 > 2 * c->bw)
-		   || (!(i % 2) && nw / 2 > 2 * c->bw)) {
-			if(i < n - 1) {
-				if(i % 2)
-					nh /= 2;
-				else
-					nw /= 2;
-				if((i % 4) == 2)
-					nx += nw;
-				else if((i % 4) == 3)
-					ny += nh;
-			}
-			if((i % 4) == 0)
-				ny -= nh;
-			else if((i % 4) == 1)
-				nx += nw;
-			else if((i % 4) == 2)
-				ny += nh;
-			else if((i % 4) == 3)
-					nx -= nw;
-			if(i == 0)
-			{
-				if(n != 1)
-					nw = m->ww * m->mfact;
-				ny = m->wy;
-			}
-			else if(i == 1)
-				nw = m->ww - nw;
-			i++;
-		}
-		resize(c, nx, ny, nw - 2 * bw, nh - 2 * bw, bw, 0);
-	}
-}
-
-void
 tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
@@ -2090,7 +2036,7 @@ updatebarpos(Monitor *m)
 }
 
 void
-updateclientlist()
+updateclientlist(void)
 {
 	Client *c;
 	Monitor *m;
@@ -2373,7 +2319,7 @@ xerrorstart(Display *dpy, XErrorEvent *ee)
 }
 
 void
-xinitvisual()
+xinitvisual(void)
 {
 	XVisualInfo *infos;
 	XRenderPictFormat *fmt;
