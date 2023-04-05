@@ -790,11 +790,16 @@ cyclelayout(const Arg *arg) {
 void
 dmenurun(const Arg *arg)
 {
+	char *hp;
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
+		hp = getenv("DMENUHP");
 		setsid();
-		execlp("dmenu_run", "dmenu_run", "-hp", getenv("DMENUHP"), NULL);
+		if (hp)
+			execlp("dmenu_run", "dmenu_run", "-hp", getenv("DMENUHP"), NULL);
+		else
+			execlp("dmenu_run", "dmenu_run", NULL);
 		die("dwm: execlp dmenurun failed");
 	}
 }
