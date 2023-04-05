@@ -13,6 +13,7 @@
 - statusbar on all monitors
 - cycle layouts
 - smartborders
+- high priority patch for dmenu_run, set up with DMENUHP env variable (add something like `export DMENUHP="chromium,st"` to your .profile)
 
 - bindings are set for [st](https://git.ratakor.com/st.git) and my [scripts](https://git.ratakor.com/dotfiles.git/tree/.local/bin)
 - modify line 106 and 107 in config.h to match with your version of dmenu otherwise use [mine](https://git.ratakor.com/dmenu.git)

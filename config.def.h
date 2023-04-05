@@ -102,16 +102,13 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenuhp[] = "browser,mail,chromium,anki"; /* high priority patch for dmenu */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-hp", dmenuhp, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
 
 static const Key keys[] = {
 	/* modifier              key                       function          argument */
-	{ MODKEY,                XK_d,                     spawn,            {.v = dmenucmd } },
+	{ MODKEY,                XK_d,                     dmenurun,         {0} },
 	{ MODKEY,                XK_Return,                spawn,            {.v = termcmd } },
 	{ 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
 	{ 0,                     XF86XK_Battery,           spawn,            SHCMD("battery") },
