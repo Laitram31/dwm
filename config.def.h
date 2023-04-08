@@ -38,18 +38,18 @@ static const char *colors[][9]          = {
 };
 static const unsigned int alphas[][9]   = {
 	/*                  fg      bg    border */
-	[SchemeNorm]    = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeSel]     = { OPAQUE, 0xd0, OPAQUE },
-	[SchemePurple]  = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeGreen]   = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeOrange]  = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeRed]     = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeYellow]  = { OPAQUE, 0xd0, OPAQUE },
-	[SchemePink]    = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeCyan]    = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeNorm]    = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeSel]     = { OPAQUE, 0xd9, OPAQUE },
+	[SchemePurple]  = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeGreen]   = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeOrange]  = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeRed]     = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeYellow]  = { OPAQUE, 0xd9, OPAQUE },
+	[SchemePink]    = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeCyan]    = { OPAQUE, 0xd9, OPAQUE },
 };
 
-static const unsigned int tagalpha[] = { OPAQUE, 0xd0 };
+static const unsigned int tagalpha[] = { OPAQUE, 0xd9 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
