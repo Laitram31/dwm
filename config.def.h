@@ -7,8 +7,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int barborders         = 1;        /* 0 means no borders in bar */
 static const char *fonts[]          = {
-	"Agave:size=10",
-	"monospace:size=14", /* this is for nerd font icons, see dwmblocks */
+	"Agave:size=10", /* this is for nerd font icons with agave nerd font */
+	"monospace:size=14",
 	"Noto Emoji:size=8",
 };
 static const char normbgcolor[]         = "#282a36";
@@ -55,13 +55,13 @@ static const unsigned int tagalpha[] = { OPAQUE, 0xd9 };
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const char *tagsel[][2] = {
-	{ "#f8f8f2", "#bd93f9" },
-	{ "#f8f8f2", "#ff79c6" },
-	{ "#f8f8f2", "#ff5555" },
-	{ "#f8f8f2", "#ffb86c" },
-	{ "#282a36", "#f1fa8c" },
-	{ "#282a36", "#50fa7b" },
-	{ "#282a36", "#8be9fd" },
+	{ "#f8f8f2", purple    },
+	{ "#f8f8f2", pink      },
+	{ "#f8f8f2", red       },
+	{ "#f8f8f2", orange    },
+	{ "#282a36", yellow    },
+	{ "#282a36", green     },
+	{ "#282a36", cyan      },
 	{ "#282a36", "#f8f8f2" },
 	{ "#f8f8f2", "#6272a4" },
 };
@@ -99,50 +99,16 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
-/* commands */
-static const char *termcmd[]  = { "st", NULL };
-
-#include <X11/XF86keysym.h>
+/* #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } } */
 
 static const Key keys[] = {
 	/* modifier              key                       function          argument */
-	{ MODKEY,                XK_d,                     dmenurun,         {0} },
-	{ MODKEY,                XK_Return,                spawn,            {.v = termcmd } },
-	{ 0,                     XF86XK_ScreenSaver,       spawn,            SHCMD("slock & xset dpms force off") },
-	{ 0,                     XF86XK_Battery,           spawn,            SHCMD("battery") },
-	{ 0,                     XK_Print,                 spawn,            SHCMD("screenshot") },
-	{ MODKEY,                XK_equal,                 spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,                XK_minus,                 spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; kill -44 $(pidof dwmblocks)") },
-	{ 0,                     XF86XK_AudioRaiseVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+; kill -44 $(pidof dwmblocks)") },
-	{ 0,                     XF86XK_AudioLowerVolume,  spawn,            SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; kill -44 $(pidof dwmblocks)") },
-	{ 0,                     XF86XK_Launch1,           spawn,            SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
-	{ 0,                     XK_F6,                    spawn,            SHCMD("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle;  kill -45 $(pidof dwmblocks)") },
-	{ 0,                     XK_F7,                    spawn,            SHCMD("st -e dmenurecord") },
-	{ MODKEY,                XK_m,                     spawn,            SHCMD("music") },
-	{ MODKEY|ShiftMask,      XK_m,                     spawn,            SHCMD("musiccmd") },
-	{ 0,                     XF86XK_AudioPrev,         spawn,            SHCMD("musiccmd prev") },
-	{ 0,                     XF86XK_AudioNext,         spawn,            SHCMD("musiccmd next") },
-	{ 0,                     XF86XK_AudioPlay,         spawn,            SHCMD("musiccmd cycle") },
-	{ 0,                     XF86XK_AudioStop,         spawn,            SHCMD("musiccmd stop") },
-	{ MODKEY,                XK_n,                     spawn,            SHCMD("st -e lfub $XDG_DATA_HOME/notes") },
-	{ MODKEY|ShiftMask,      XK_n,                     spawn,            SHCMD("st -e newsboat") },
-	{ MODKEY,                XK_u,                     spawn,            SHCMD("dmenuhandler $(xclip -o)") },
-	{ MODKEY|ShiftMask,      XK_u,                     spawn,            SHCMD("linkhandler $(xclip -o)") },
-	{ MODKEY,                XK_e,                     spawn,            SHCMD("dmenuemoji") },
-	{ MODKEY|ShiftMask,      XK_h,                     spawn,            SHCMD("dmenusearch man") },
-	{ MODKEY,                XK_s,                     spawn,            SHCMD("dmenusearch web") },
-	{ MODKEY,                XK_a,                     spawn,            SHCMD("dmenusearch aur") },
-	{ MODKEY,                XK_y,                     spawn,            SHCMD("dmenusearch youtube") },
-	{ MODKEY,                XK_w,                     spawn,            SHCMD("dmenusearch wiki") },
-	{ MODKEY|ShiftMask,      XK_w,                     spawn,            SHCMD("off") },
 	{ MODKEY|ShiftMask,      XK_b,                     togglebar,        {0} },
 	{ MODKEY,                XK_f,                     togglefullscr,    {0} },
 	{ MODKEY,                XK_j,                     focusstack,       {.i = +1 } },
 	{ MODKEY,                XK_k,                     focusstack,       {.i = -1 } },
 	{ MODKEY,                XK_i,                     incnmaster,       {.i = +1 } },
-	{ MODKEY,                XK_p,                     incnmaster,       {.i = -1 } },
+	{ MODKEY,                XK_o,                     incnmaster,       {.i = -1 } },
 	{ MODKEY,                XK_h,                     setmfact,         {.f = -0.05} },
 	{ MODKEY,                XK_l,                     setmfact,         {.f = +0.05} },
 	{ MODKEY|ShiftMask,      XK_Return,                zoom,             {0} },
@@ -174,10 +140,9 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask        button          function        argument */
-	{ ClkLtSymbol,          0,                Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,                Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,                Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,                Button2,        spawn,          {.v = termcmd } },
+	{ ClkLtSymbol,          0,                Button1,        cyclelayout,    {.i = +1 } },
+	/* { ClkWinTitle,          0,                Button2,        zoom,           {0} }, */
+	/* { ClkStatusText,        0,                Button2,        spawn,          {.v = termcmd } }, */
 	{ ClkClientWin,         MODKEY,           Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY|ShiftMask, Button1,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY,           Button2,        togglefloating, {0} },
@@ -187,4 +152,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,           Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,           Button3,        toggletag,      {0} },
 };
-

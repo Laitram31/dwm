@@ -1,5 +1,13 @@
 # Ratakor's build of dwm
 
+## Change of 2023-04-14
+For default keybinds read the man pages, it is up to date, there are no default
+keybind for st or dmenu to allow the use of the use of other terminal or
+application launcher without recompiling (this change is related to
+[this](https://github.com/ratakor/ratakor-repo).
+
+To set your own keybinds you should use [sxhkd](https://github.com/baskerville/sxhkd).
+
 ## patch added and changes iirc
 - attach aside
 - rainbow tab
@@ -13,10 +21,6 @@
 - statusbar on all monitors
 - cycle layouts
 - smartborders
-- high priority patch for dmenu_run, set up with DMENUHP env variable (add something like `export DMENUHP="chromium,st"` to your .profile)
-
-- bindings are set for [st](https://git.ratakor.com/st.git) and my [scripts](https://git.ratakor.com/dotfiles.git/tree/.local/bin)
-- the man page is not up to date
 
 ---
 

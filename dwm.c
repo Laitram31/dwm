@@ -165,7 +165,6 @@ static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
 static Monitor *createmon(void);
 static void cyclelayout(const Arg *arg);
-static void dmenurun(const Arg *arg);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
@@ -215,7 +214,7 @@ static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
-static void spawn(const Arg *arg);
+/* static void spawn(const Arg *arg); */
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
@@ -784,23 +783,6 @@ cyclelayout(const Arg *arg) {
 			setlayout(&((Arg) { .v = (l - 1) }));
 		else
 			setlayout(&((Arg) { .v = &layouts[LENGTH(layouts) - 2] }));
-	}
-}
-
-void
-dmenurun(const Arg *arg)
-{
-	char *hp;
-	if (fork() == 0) {
-		if (dpy)
-			close(ConnectionNumber(dpy));
-		hp = getenv("DMENUHP");
-		setsid();
-		if (hp)
-			execlp("dmenu_run", "dmenu_run", "-hp", getenv("DMENUHP"), NULL);
-		else
-			execlp("dmenu_run", "dmenu_run", NULL);
-		die("dwm: execlp dmenurun failed");
 	}
 }
 
@@ -1839,6 +1821,7 @@ sigchld(int unused)
 	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
+/*
 void
 spawn(const Arg *arg)
 {
@@ -1850,6 +1833,7 @@ spawn(const Arg *arg)
 		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
 	}
 }
+*/
 
 void
 tag(const Arg *arg)
