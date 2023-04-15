@@ -1,17 +1,19 @@
 # Ratakor's build of dwm
 
-## Change of 2023-04-14
+## Important notes
 For default keybinds read the man pages, it is up to date, there are no default
 keybind for st or dmenu to allow the use of the use of other terminal or
-application launcher without recompiling (this change is related to
-[this](https://github.com/ratakor/ratakor-repo).
+application launcher without recompiling.
 
-To set your own keybinds you should use [sxhkd](https://github.com/baskerville/sxhkd).
+Thus This build of dwm can be used as a
+[package](https://github.com/ratakor/ratakor-repo) and modified only through
+[sxhkd](https://github.com/baskerville/sxhkd) and
+[Xresources](https://wiki.archlinux.org/title/X_resources).
 
 ## patch added and changes iirc
 - attach aside
 - rainbow tab
-- dracula theme
+- Xresources but default to dracula theme
 - alpha (transparency)
 - quitprompt (Super + Shift + E)
 - bartab (all app are shown in status bar and have an optional border)
