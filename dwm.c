@@ -173,6 +173,7 @@ static void drawbar(Monitor *m);
 static void drawbars(void);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
+static int restartsig(void);
 static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
@@ -942,6 +943,22 @@ expose(XEvent *e)
 		drawbar(m);
 }
 
+int
+restartsig(void)
+{
+	char sig[256];
+
+	/* Get root name property */
+	gettextprop(root, XA_WM_NAME, sig, sizeof(sig));
+
+	if (strncmp("restart", sig, strlen(sig)) == 0) {
+		restart = 1;
+		quit(NULL);
+		return 1;
+	}
+	return 0;
+}
+
 void
 focus(Client *c)
 {
@@ -1369,11 +1386,12 @@ propertynotify(XEvent *e)
 	Window trans;
 	XPropertyEvent *ev = &e->xproperty;
 
-	if ((ev->window == root) && (ev->atom == XA_WM_NAME))
-		updatestatus();
-	else if (ev->state == PropertyDelete)
+	if ((ev->window == root) && (ev->atom == XA_WM_NAME)) {
+		if (!restartsig())
+			updatestatus();
+	} else if (ev->state == PropertyDelete) {
 		return; /* ignore */
-	else if ((c = wintoclient(ev->window))) {
+	} else if ((c = wintoclient(ev->window))) {
 		switch(ev->atom) {
 		default: break;
 		case XA_WM_TRANSIENT_FOR:
@@ -1410,12 +1428,11 @@ quitprompt(const Arg *arg)
 {
 	FILE *pp = popen("printf 'no\nyes\nrestart' | dmenu -i -sb '#ff79c6' -p 'Quit DWM?'", "r");
 	if(pp != NULL) {
-		char buf[1024];
+		char buf[1024]; /* too big ? */
 		if (fgets(buf, sizeof(buf), pp) == NULL) {
 			fprintf(stderr, "Quitprompt: Error reading pipe!\n");
 			return;
-		}
-		if (strcmp(buf, "yes\n") == 0) {
+		} if (strcmp(buf, "yes\n") == 0) {
 			pclose(pp);
 			restart = 0;
 			quit(NULL);
