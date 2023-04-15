@@ -11,41 +11,42 @@ static const char *fonts[]          = {
 	"monospace:size=14",
 	"Noto Emoji:size=8",
 };
-static const char normbgcolor[]         = "#282a36";
-static const char normbordercolor[]     = "#44475a";
-static const char normfgcolor[]         = "#f8f8f2"; /* 1 */
-static const char selbgcolor[]          = "#282a36";
-static const char selbordercolor[]      = "#bd93f9";
-static const char selfgcolor[]          = "#bd93f9"; /* 2 */
-static const char purple[]              = "#bd93f9"; /* 3 */
-static const char green[]               = "#50fa7b"; /* 4 */
-static const char orange[]              = "#ffb86c"; /* 5 */
-static const char red[]                 = "#ff5555"; /* 6 */
-static const char yellow[]              = "#f1fa8c"; /* 7 */
-static const char pink[]                = "#ff79c6"; /* 8 */
-static const char cyan[]                = "#8be9fd"; /* 9 */
-static const char *colors[][9]          = {
+static char normbgcolor[]         = "#282a36";
+static char normbordercolor[]     = "#44475a";
+static char normfgcolor[]         = "#f8f8f2"; /* 1 */
+static char selbgcolor[]          = "#282a36";
+static char selbordercolor[]      = "#bd93f9";
+static char selfgcolor[]          = "#bd93f9"; /* 2 */
+static char blue[]                = "#bd93f9"; /* 3 (purple in dracula theme) */
+static char green[]               = "#50fa7b"; /* 4 */
+static char orange[]              = "#ffb86c"; /* 5 */
+static char red[]                 = "#ff5555"; /* 6 */
+static char yellow[]              = "#f1fa8c"; /* 7 */
+static char purple[]              = "#ff79c6"; /* 8 (pink in dracula theme) */
+static char cyan[]                = "#8be9fd"; /* 9 */
+static char last[]                = "#6272a4";
+static char *colors[][3]          = {
 	/*                  fg           bg           border          */
 	[SchemeNorm]    = { normfgcolor, normbgcolor, normbordercolor },
 	[SchemeSel]     = { selfgcolor,  selbgcolor,  selbordercolor  },
-	[SchemePurple]  = { purple,      normbgcolor, normbordercolor },
+	[SchemeBlue]    = { blue,        normbgcolor, normbordercolor },
 	[SchemeGreen]   = { green,       normbgcolor, normbordercolor },
 	[SchemeOrange]  = { orange,      normbgcolor, normbordercolor },
 	[SchemeRed]     = { red,         normbgcolor, normbordercolor },
 	[SchemeYellow]  = { yellow,      normbgcolor, normbordercolor },
-	[SchemePink]    = { pink,        normbgcolor, normbordercolor },
+	[SchemePurple]  = { purple,      normbgcolor, normbordercolor },
 	[SchemeCyan]    = { cyan,        normbgcolor, normbordercolor },
 };
-static const unsigned int alphas[][9]   = {
+static const unsigned int alphas[][3]   = {
 	/*                  fg      bg    border */
 	[SchemeNorm]    = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeSel]     = { OPAQUE, 0xd9, OPAQUE },
-	[SchemePurple]  = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeBlue]    = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeGreen]   = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeOrange]  = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeRed]     = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeYellow]  = { OPAQUE, 0xd9, OPAQUE },
-	[SchemePink]    = { OPAQUE, 0xd9, OPAQUE },
+	[SchemePurple]  = { OPAQUE, 0xd9, OPAQUE },
 	[SchemeCyan]    = { OPAQUE, 0xd9, OPAQUE },
 };
 
@@ -54,16 +55,34 @@ static const unsigned int tagalpha[] = { OPAQUE, 0xd9 };
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-static const char *tagsel[][2] = {
-	{ "#f8f8f2", purple    },
-	{ "#f8f8f2", pink      },
-	{ "#f8f8f2", red       },
-	{ "#f8f8f2", orange    },
-	{ "#282a36", yellow    },
-	{ "#282a36", green     },
-	{ "#282a36", cyan      },
-	{ "#282a36", "#f8f8f2" },
-	{ "#f8f8f2", "#6272a4" },
+static char *tagsel[][2] = {
+	{ normfgcolor, blue },
+	{ normfgcolor, purple },
+	{ normfgcolor, red },
+	{ normfgcolor, orange },
+	{ normbgcolor, yellow },
+	{ normbgcolor, green },
+	{ normbgcolor, cyan },
+	{ normbgcolor, normfgcolor },
+	{ normfgcolor, last },
+};
+
+/* Xresources preferences to load at startup */
+ResourcePref resources[] = {
+	{ "normbgcolor",      STRING,  &normbgcolor },
+	{ "normbordercolor",  STRING,  &normbordercolor },
+	{ "normfgcolor",      STRING,  &normfgcolor },
+	{ "selbgcolor",       STRING,  &selbgcolor },
+	{ "selbordercolor",   STRING,  &selbordercolor },
+	{ "selfgcolor",       STRING,  &selfgcolor },
+	{ "color4",           STRING,  &blue },
+	{ "color2",           STRING,  &green },
+	{ "orange",           STRING,  &orange },
+	{ "color1",           STRING,  &red },
+	{ "color3",           STRING,  &yellow },
+	{ "color5",           STRING,  &purple },
+	{ "color6",           STRING,  &cyan },
+	{ "last",             STRING,  &last },
 };
 
 static const Rule rules[] = {
