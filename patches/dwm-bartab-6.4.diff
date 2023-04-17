@@ -82,7 +82,7 @@ index c2bd871..d58c043 100644
 +		if (barborders) {
 +			XSetForeground(drw->dpy, drw->gc, drw->scheme[ColBorder].pixel);
 +			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, 1, bh);
-+			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w, 0, 1, bh);
++			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w - 1, 0, 1, bh);
 +		}
 +
 +		i++;

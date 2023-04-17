@@ -510,7 +510,7 @@ bartab(Monitor *m, int offx, int sw)
 		if (barborders) {
 			XSetForeground(drw->dpy, drw->gc, drw->scheme[ColBorder].pixel);
 			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, 1, bh);
-			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w, 0, 1, bh);
+			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x + w - 1, 0, 1, bh);
 		}
 
 		i++;
