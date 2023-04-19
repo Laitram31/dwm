@@ -33,6 +33,8 @@ The attach below patch makes newly spawned windows attach after the currently
 selected window
 .P
 dwm draws a small border around windows to indicate the focus state.
+.P
+kill -10 $(pidof dwm) is the command to restart dwm.
 .SH OPTIONS
 .TP
 .B \-v
@@ -142,7 +144,8 @@ Toggles focused window between floating and tiled state.
 Resize focused window while dragging. Tiled windows will be toggled to the floating state.
 .SH CUSTOMIZATION
 dwm is customized by creating a custom config.h and (re)compiling the source
-code. This keeps it fast, secure and simple. But for this build you should use 
+code. This keeps it fast, secure and simple. But this build is intended to be
+run with
 .BR sxhkd (1)
 and
 .BR xrdb (1)

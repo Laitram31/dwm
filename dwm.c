@@ -187,7 +187,6 @@ static void drawbar(Monitor *m);
 static void drawbars(void);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
-static int restartsig(void);
 static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
@@ -231,6 +230,7 @@ static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
+static void sigrestart(int unused);
 /* static void spawn(const Arg *arg); */
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
@@ -959,22 +959,6 @@ expose(XEvent *e)
 		drawbar(m);
 }
 
-int
-restartsig(void)
-{
-	char sig[256];
-
-	/* Get root name property */
-	gettextprop(root, XA_WM_NAME, sig, sizeof(sig));
-
-	if (strncmp("restart", sig, strlen(sig)) == 0) {
-		restart = 1;
-		quit(NULL);
-		return 1;
-	}
-	return 0;
-}
-
 void
 focus(Client *c)
 {
@@ -1422,8 +1406,7 @@ propertynotify(XEvent *e)
 	XPropertyEvent *ev = &e->xproperty;
 
 	if ((ev->window == root) && (ev->atom == XA_WM_NAME)) {
-		if (!restartsig())
-			updatestatus();
+		updatestatus();
 	} else if (ev->state == PropertyDelete) {
 		return; /* ignore */
 	} else if ((c = wintoclient(ev->window))) {
@@ -1812,6 +1795,9 @@ setup(void)
 	/* clean up any zombies immediately */
 	sigchld(0);
 
+	/* handle SIGUSR1 for restart */
+	signal(SIGUSR1, sigrestart);
+
 	/* init screen */
 	screen = DefaultScreen(dpy);
 	sw = DisplayWidth(dpy, screen);
@@ -1915,6 +1901,13 @@ sigchld(int unused)
 	if (signal(SIGCHLD, sigchld) == SIG_ERR)
 		die("can't install SIGCHLD handler:");
 	while (0 < waitpid(-1, NULL, WNOHANG));
+}
+
+void
+sigrestart(int unused)
+{
+	restart = 1;
+	quit(NULL);
 }
 
 /*

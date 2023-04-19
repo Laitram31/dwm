@@ -23,6 +23,7 @@ Thus This build of dwm can be used as a
 - statusbar on all monitors
 - cycle layouts
 - smartborders
+- restart with `kill -10 $(pidof dwm)`
 
 ---
 
