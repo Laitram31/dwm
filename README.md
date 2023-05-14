@@ -3,7 +3,8 @@
 ## Important notes
 For default keybinds read the man pages, it is up to date, there are no default
 keybind for st or dmenu to allow the use of the use of other terminal or
-application launcher without recompiling.
+application launcher without recompiling. Gaps are disabled by default, it's
+possible to enable them via Xresources if dwm was installed from ratakor-repo.
 
 Thus This build of dwm can be used as a
 [package](https://github.com/ratakor/ratakor-repo) and modified only through
@@ -23,7 +24,12 @@ Thus This build of dwm can be used as a
 - statusbar on all monitors
 - cycle layouts
 - smartborders
+- gaps (also in bar, everything can be disabled with super + shift + g)
 - restart with `kill -10 $(pidof dwm)`
+
+## Xresources
+Read config.def.h, mainly colors set with a string like '#BD93F9' but there is
+also enablegaps that can be set to +1 to enable gaps.
 
 ---
 
