@@ -2,34 +2,40 @@
 
 ## Important notes
 For default keybinds read the man pages, it is up to date, there are no default
-keybind for st or dmenu to allow the use of the use of other terminal or
-application launcher without recompiling. Gaps are disabled by default, it's
-possible to enable them via Xresources if dwm was installed from ratakor-repo.
+keybinds for st or dmenu to allow the use of other terminal or application
+launcher without recompiling.
 
-Thus This build of dwm can be used as a
+Thus this build of dwm can be used as a
 [package](https://github.com/ratakor/ratakor-repo) and modified only through
 [sxhkd](https://github.com/baskerville/sxhkd) and
 [Xresources](https://wiki.archlinux.org/title/X_resources).
+
+Gaps are disabled by default, it's possible to enable them via Xresources by
+setting dwm.enablegaps to +1 or by setting enablegaps to 1 in config.h, it's
+even possible to enable them on the fly with super + shift + g.
 
 ## patch added and changes iirc
 - attach aside
 - rainbow tab
 - Xresources but default to dracula theme
 - alpha (transparency)
-- quitprompt (Super + Shift + E)
+- quitprompt (super + shift + e)
 - bartab (all app are shown in status bar and have an optional border)
 - 3 layouts, tile, bottom stack and floating
-- true fullscreen with Super + F
-- color in status bar
-- statusbar on all monitors
-- cycle layouts
+- true fullscreen (super + f)
+- colors in status bar
+- status bar on all monitors
+- cycle layouts (super + shift + space)
 - smartborders
-- gaps (also in bar, everything can be disabled with super + shift + g)
+- gaps (also in bar, everything can be toggled on/off with super + shift + g)
 - restart with `kill -10 $(pidof dwm)`
 
-## Xresources
-Read config.def.h, mainly colors set with a string like '#BD93F9' but there is
-also enablegaps that can be set to +1 to enable gaps.
+## TODO
+
+- Add rofi or any application launcher support to quitprompt or add dmenu as a
+dependency
+- Fix ugly hard code of font because icons are too big or too small
+- Add an azerty configuration switch maybe or autodetect layout idk
 
 ---
 
