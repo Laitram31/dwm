@@ -1,17 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 5;        /* snap pixel */
-static const unsigned int gaps      = 15;       /* gaps pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int barborders         = 1;        /* 0 means no borders in bar */
-static int enablegaps               = 0;        /* 0 means no gaps */
-static const char *fonts[]          = {
+static unsigned int borderpx  = 2;        /* border pixel of windows */
+static unsigned int snap      = 5;        /* snap pixel */
+static unsigned int gaps      = 15;       /* gaps pixel */
+static int enablegaps         = 0;        /* 0 means no gaps */
+static int showbar            = 1;        /* 0 means no bar */
+static int topbar             = 1;        /* 0 means bottom bar */
+static int barborders         = 1;        /* 0 means no borders in bar */
+static const char *fonts[]    = {
 	"Agave:size=10", /* this is for nerd font icons with agave nerd font */
-	"monospace:size=14",
-	"Noto Emoji:size=8",
+	"monospace:size=13"
 };
 static char normbgcolor[]         = "#282a36";
 static char normbordercolor[]     = "#44475a";
@@ -71,6 +70,13 @@ static char *tagsel[][2] = {
 
 /* Xresources preferences to load at startup */
 ResourcePref resources[] = {
+	{ "borderpx",         INTEGER, &borderpx },
+	{ "snap",             INTEGER, &snap },
+	{ "gaps",             INTEGER, &gaps },
+	{ "enablegaps",       INTEGER, &enablegaps }, /* bool */
+	{ "showbar",          INTEGER, &showbar },    /* bool */
+	{ "topbar",           INTEGER, &topbar },     /* bool */
+	{ "barborders",       INTEGER, &barborders }, /* bool */
 	{ "normbgcolor",      STRING,  &normbgcolor },
 	{ "normbordercolor",  STRING,  &normbordercolor },
 	{ "normfgcolor",      STRING,  &normfgcolor },
@@ -84,8 +90,7 @@ ResourcePref resources[] = {
 	{ "color3",           STRING,  &yellow },
 	{ "color5",           STRING,  &magenta },
 	{ "color6",           STRING,  &cyan },
-	{ "last",             STRING,  &last },
-	{ "enablegaps",       INTEGER, &enablegaps },
+	{ "last",             STRING,  &last }
 };
 
 static const Rule rules[] = {

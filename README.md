@@ -32,8 +32,7 @@ even possible to enable them on the fly with super + shift + g.
 
 ## TODO
 
-- Add rofi or any application launcher support to quitprompt or add dmenu as a
-dependency
+- Add rofi or any application launcher support to quitprompt
 - Fix ugly hard code of font because icons are too big or too small
 - Add an azerty configuration switch maybe or autodetect layout idk
 
