@@ -15,7 +15,10 @@ setting dwm.enablegaps to +1 or by setting enablegaps to 1 in config.h, it's
 even possible to enable them on the fly with super + shift + g.
 
 ## patch added and changes iirc
+- azerty
 - attach aside
+- barheight
+- canfocusrule
 - rainbow tab
 - Xresources but default to dracula theme
 - alpha (transparency)

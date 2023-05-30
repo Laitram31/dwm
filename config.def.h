@@ -3,13 +3,15 @@
 /* appearance */
 static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 5;        /* snap pixel */
-static unsigned int gaps      = 15;       /* gaps pixel */
-static int enablegaps         = 0;        /* 0 means no gaps */
+static unsigned int gaps      = 8;       /* gaps pixel */
+static int enablegaps         = 1;        /* 0 means no gaps */
 static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 1;        /* 0 means bottom bar */
+static int topbar             = 0;        /* 0 means bottom bar */
+static const int user_bh	= 25;
 static int barborders         = 1;        /* 0 means no borders in bar */
+static const int alpha		= 0xec;
 static const char *fonts[]    = {
-	"Agave:size=10", /* this is for nerd font icons with agave nerd font */
+	"Cousine:size=10", /* this is for nerd font icons with agave nerd font */
 	"monospace:size=13"
 };
 static char normbgcolor[]         = "#282a36";
@@ -40,18 +42,18 @@ static char *colors[][3]          = {
 };
 static const unsigned int alphas[][3]   = {
 	/*                  fg      bg    border */
-	[SchemeNorm]    = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeSel]     = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeBlue]    = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeGreen]   = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeOrange]  = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeRed]     = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeYellow]  = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeMagenta] = { OPAQUE, 0xd9, OPAQUE },
-	[SchemeCyan]    = { OPAQUE, 0xd9, OPAQUE },
+	[SchemeNorm]    = { OPAQUE, alpha, OPAQUE },
+	[SchemeSel]     = { OPAQUE, alpha, OPAQUE },
+	[SchemeBlue]    = { OPAQUE, alpha, OPAQUE },
+	[SchemeGreen]   = { OPAQUE, alpha, OPAQUE },
+	[SchemeOrange]  = { OPAQUE, alpha, OPAQUE },
+	[SchemeRed]     = { OPAQUE, alpha, OPAQUE },
+	[SchemeYellow]  = { OPAQUE, alpha, OPAQUE },
+	[SchemeMagenta] = { OPAQUE, alpha, OPAQUE },
+	[SchemeCyan]    = { OPAQUE, alpha, OPAQUE },
 };
 
-static const unsigned int tagalpha[] = { OPAQUE, 0xd9 };
+static const unsigned int tagalpha[] = { OPAQUE, alpha };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -98,8 +100,10 @@ static const Rule rules[] = {
 	 *    WM_CLASS(STRING) = instance, class
 	 *    WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "dummy",    NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class      instance    title       tags mask     isfloating		canfocus	 monitor */
+	{ "arttime",    NULL,       NULL,       1,       1,           1,	-1},
+	{ NULL,		NULL,		"mpv",	1,	1,		1,	-1},
+	{ NULL,		NULL,	"GLava",	1,	1,	0,	-1},
 };
 
 /* layout(s) */
@@ -146,21 +150,21 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,    XK_q,          killclient,       {0} },
 	{ MODKEY,              XK_space,      togglefloating,   {0} },
 	{ MODKEY|ShiftMask,    XK_space,      cyclelayout,      {.i = +1 } },
-	{ MODKEY,              XK_0,          view,             {.ui = ~0 } },
-	{ MODKEY|ShiftMask,    XK_0,          tag,              {.ui = ~0 } },
+	{ MODKEY,              XK_agrave,          view,             {.ui = ~0 } },
+	{ MODKEY|ShiftMask,    XK_agrave,          tag,              {.ui = ~0 } },
 	{ MODKEY,              XK_comma,      focusmon,         {.i = -1 } },
-	{ MODKEY,              XK_period,     focusmon,         {.i = +1 } },
+	{ MODKEY,              XK_semicolon,     focusmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,    XK_comma,      tagmon,           {.i = -1 } },
-	{ MODKEY|ShiftMask,    XK_period,     tagmon,           {.i = +1 } },
-	TAGKEYS(               XK_1,                            0)
-	TAGKEYS(               XK_2,                            1)
-	TAGKEYS(               XK_3,                            2)
-	TAGKEYS(               XK_4,                            3)
-	TAGKEYS(               XK_5,                            4)
-	TAGKEYS(               XK_6,                            5)
-	TAGKEYS(               XK_7,                            6)
-	TAGKEYS(               XK_8,                            7)
-	TAGKEYS(               XK_9,                            8)
+	{ MODKEY|ShiftMask,    XK_semicolon,     tagmon,           {.i = +1 } },
+	TAGKEYS(               XK_ampersand,                            0)
+	TAGKEYS(               XK_eacute,                            1)
+	TAGKEYS(               XK_quotedbl,                            2)
+	TAGKEYS(               XK_apostrophe,                            3)
+	TAGKEYS(               XK_parenleft,                            4)
+	TAGKEYS(               XK_minus,                            5)
+	TAGKEYS(               XK_egrave,                            6)
+	TAGKEYS(               XK_underscore,                            7)
+	TAGKEYS(               XK_ccedilla,                            8)
 	{ MODKEY|ShiftMask,    XK_e,          quitprompt,       {0} },
 };
 
