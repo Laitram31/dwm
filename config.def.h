@@ -6,27 +6,27 @@ static unsigned int snap      = 5;        /* snap pixel */
 static unsigned int gaps      = 8;       /* gaps pixel */
 static int enablegaps         = 1;        /* 0 means no gaps */
 static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 0;        /* 0 means bottom bar */
-static const int user_bh	= 25;
+static int topbar             = 1;        /* 0 means bottom bar */
+static const int user_bh	= 30;
 static int barborders         = 1;        /* 0 means no borders in bar */
 static const int alpha		= 0xec;
 static const char *fonts[]    = {
-	"Cousine:size=10", /* this is for nerd font icons with agave nerd font */
-	"monospace:size=13"
+	"Cousine:size=12", /* this is for nerd font icons with cousine nerd font */
+	"monospace:size=17"
 };
 static char normbgcolor[]         = "#282a36";
-static char normbordercolor[]     = "#44475a";
-static char normfgcolor[]         = "#f8f8f2"; /* 1 */
+static char normbordercolor[]     = "#ebdbb2";
+static char normfgcolor[]         = "#ebdbb2"; /* 1 */
 static char selbgcolor[]          = "#282a36";
-static char selbordercolor[]      = "#bd93f9";
-static char selfgcolor[]          = "#bd93f9"; /* 2 */
-static char blue[]                = "#bd93f9"; /* 3 (purple in dracula theme) */
-static char green[]               = "#50fa7b"; /* 4 */
-static char orange[]              = "#ffb86c"; /* 5 */
-static char red[]                 = "#ff5555"; /* 6 */
-static char yellow[]              = "#f1fa8c"; /* 7 */
-static char magenta[]             = "#ff79c6"; /* 8 (pink in dracula theme) */
-static char cyan[]                = "#8be9fd"; /* 9 */
+static char selbordercolor[]      = "#ff8c69";
+static char selfgcolor[]          = "#ffc0cb"; /* 2 */
+static char blue[]                = "#458588"; /* 3 (purple in dracula theme) */
+static char green[]               = "#b8bb26"; /* 4 */
+static char orange[]              = "#fe8019"; /* 5 */
+static char red[]                 = "#cc241d"; /* 6 */
+static char yellow[]              = "#fabd2f"; /* 7 */
+static char magenta[]             = "#b16286"; /* 8 (pink in dracula theme) */
+static char cyan[]                = "#689D6A"; /* 9 */
 static char last[]                = "#6272a4";
 static char *colors[][3]          = {
 	/*                  fg           bg           border          */
@@ -56,7 +56,7 @@ static const unsigned int alphas[][3]   = {
 static const unsigned int tagalpha[] = { OPAQUE, alpha };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 
 static char *tagsel[][2] = {
 	{ normfgcolor, blue },
